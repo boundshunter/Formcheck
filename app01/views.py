@@ -23,6 +23,9 @@ class FM(forms.Form):
     email = fields.EmailField(error_messages={'required': '邮箱不能为空', 'invalid': '邮箱格式错误'},
                               label="邮箱"
                               )
+    f = fields.FileField(allow_empty_file=False)
+
+    p = fields.FilePathField(path='app01') # 列出app01目录下所有文件
 
 
 def fm(request):
