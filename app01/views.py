@@ -27,10 +27,24 @@ class FM(forms.Form):
 
     p = fields.FilePathField(path='app01') # 列出app01目录下所有文件
 
+    city1 = fields.ChoiceField(
+        choices=[(0, '北京'), (1, '吉林'), (2, '银川')]
+    )
+    city2 = fields.MultipleChoiceField(
+        choices=[(0, '广东'), (1, '深圳'), (2, '东莞')]
+    )
+
 
 def fm(request):
     if request.method == 'GET':
-        obj = FM()
+        dic = {
+            'user': 'a1',
+            'pwd': 'abc',
+            'email': 'aa@test.com',
+            'city1': 2,
+            'city2': [0, 1],
+        }
+        obj = FM(initial=dic) # 设置初始值，必须是个字典，字典中值的获取可以是从数据库中获得可以手动指定
         return render(request, 'fm.html', {'obj': obj})
     elif request.method == 'POST':
         # 获取用户所有数据
